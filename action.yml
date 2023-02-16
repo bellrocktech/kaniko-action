@@ -1,0 +1,68 @@
+name: "Kaniko Builder"
+description: "build/push container images"
+
+inputs:
+  path:
+    description: 'Path to the build context'
+    required: false
+    default: "."
+  registry:
+    description: "Container registry to push to"
+    required: true
+  username:
+    description: "Container registry username"
+    required: true
+  password:
+    description: "Container registry password"
+    required: true
+  images:
+    description: |
+      provides compat for docker/metadata-action
+      list of images with tags, one per line e.g.
+        
+        images: |
+          repo/image:tag1
+          repo/image:tag2
+    required: false
+  image:
+    description: "Image name to build, cannot be used with 'images'"
+    required: false
+  tag:
+    description: "Image tag to build, cannot be used with 'images'"
+    required: false
+  cache:
+    description: "Cache build layers / image"
+    required: false
+  cache_ttl:
+    description: "TTL after which the cache is considered stale"
+    required: false
+  cache_url:
+    description: "registry and path to use for cache: reg.example.com/repo/cache"
+    required: false
+  dockerfile:
+    description: "Dockerfile"
+    required: false
+  strip_tag_prefix:
+    description: "Prefix to be stripped from the tag"
+    required: false
+  extra_args:
+    description: "Additional args for kaniko executor"
+    required: false
+  build_args:
+    description: "comma separated --build-arg(s) for kaniko: foo=bar,bar=baz"
+    required: false
+  skip_unchanged_digest:
+    description: "Avoids pushing image on same digest"
+    required: false
+  tag_with_latest:
+    description: "Tag this image build with 'latest' tag"
+    required: false
+  target:
+    description: "Build this target from a multistage Dockerfile"
+    required: false
+  debug:
+    description: "Verbose output"
+    required: false
+runs:
+  using: "docker"
+  image: "Dockerfile"
