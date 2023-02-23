@@ -143,8 +143,6 @@ func writeAuth() {
 }
 
 func main() {
-	fmt.Println("ARGS", os.Args)
-	fmt.Println("ENV", os.Environ())
 	cmdArgs := make([]string, 0)
 
 	cmdArgs = append(cmdArgs, "--reproducible", "--force", "--verbosity=info")
