@@ -80,8 +80,6 @@ func init() {
 
 	if registry == "docker.io" {
 		registry = fmt.Sprintf("index.%s/v1/", registry)
-	} else {
-		image = registry + "/" + image
 	}
 
 	if cacheURL == "" {
@@ -168,7 +166,7 @@ func main() {
 	if image == "" {
 		images := scanImages()
 		if len(images) == 0 {
-			output(fmt.Errorf("no image name provided"))
+			output(fmt.Errorf("no image name provided from either 'image' or 'images' inputs"))
 			os.Exit(1)
 		}
 		for _, img := range images {
