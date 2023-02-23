@@ -78,15 +78,18 @@ images: |
   repo/image:tag1
 `````
 
-| Name | Required | Description                         |
-| --- |----------|-------------------------------------|
-| `registry` | true     | The registry to push the image to   |
-| `username` | true   | registry username                   |
-| `password` | true     | registry password                   |
-| `images` | false    | The image names and tags to push to |
-| `image` | false    | The image name to push to           |
-| `tag` | false    | The tag to push to                  |
-| `tag_with_latest` | false    | Tag the image with latest           |
-| `path` | false    | build context path                  |
-| `cache` | false    | enable caching                      |
-| `cache_url` | false    | cache url                           |
+| Name | Required | Description                                   |
+| --- |----------|-----------------------------------------------|
+| `registry` | true     | The registry to push the image to             |
+| `username` | true   | registry username                             |
+| `password` | true     | registry password                             |
+| `images` | false    | The image names and tags to push to           |
+| `image` | false    | The image name to push to                     |
+| `tag` | false    | The tag to push to                            |
+| `tag_with_latest` | false    | Tag the image with latest                     |
+| `path` | false    | build context path                            |
+| `dockerfile` | false    | dockerfile path/name                          |
+| `cache` | false    | enable caching                                |
+| `cache_url` | false    | cache url                                     |
+| `extra_args` | false    | extra args to pass to kaniko                  |
+| `build_args` | false    | build args to pass to kaniko: FOO=bar,BAR=baz |
