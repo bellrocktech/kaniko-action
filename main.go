@@ -145,7 +145,9 @@ func writeAuth() {
 func main() {
 	cmdArgs := make([]string, 0)
 
-	cmdArgs = append(cmdArgs, "--reproducible", "--force", "--verbosity=info")
+	// reproducible is still broken since 1.7.0 - https://github.com/GoogleContainerTools/kaniko/issues/2005
+	// cmdArgs = append(cmdArgs, "--reproducible", "--force", "--verbosity=info")
+	cmdArgs = append(cmdArgs, "--force", "--verbosity=info")
 
 	if cache {
 		cmdArgs = append(cmdArgs, "--cache=true", "--cache-ttl=48h", fmt.Sprintf("--cache-repo=%s", cacheURL))
@@ -171,7 +173,7 @@ func main() {
 			cmdArgs = append(cmdArgs, "--destination", registry+"/"+img)
 		}
 	} else {
-		cmdArgs = append(cmdArgs, "--destination", fmt.Sprintf("%s:%s", image, tag))
+		cmdArgs = append(cmdArgs, "--destination", fmt.Sprintf("%s/%s:%s", registry, image, tag))
 	}
 
 	writeAuth()
