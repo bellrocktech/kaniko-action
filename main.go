@@ -27,6 +27,7 @@ var (
 	context    = path.Join(os.Getenv("GITHUB_WORKSPACE"), os.Getenv("INPUT_PATH"))
 	dockerfile = os.Getenv("INPUT_DOCKERFILE")
 	tagLatest  = os.Getenv("INPUT_TAG_WITH_LATEST") == "true"
+	target     = os.Getenv("INPUT_TARGET")
 
 	imageLatest = ""
 
@@ -145,12 +146,16 @@ func writeAuth() {
 func main() {
 	cmdArgs := make([]string, 0)
 
-	// reproducible is still broken since 1.7.0 - https://github.com/GoogleContainerTools/kaniko/issues/2005
+	// reproducible is still broken since 1.7.0 :( - https://github.com/GoogleContainerTools/kaniko/issues/2005
 	// cmdArgs = append(cmdArgs, "--reproducible", "--force", "--verbosity=info")
 	cmdArgs = append(cmdArgs, "--force", "--verbosity=info")
 
 	if cache {
 		cmdArgs = append(cmdArgs, "--cache=true", "--cache-ttl=48h", fmt.Sprintf("--cache-repo=%s", cacheURL))
+	}
+
+	if target != "" {
+		cmdArgs = append(cmdArgs, "--target", target)
 	}
 
 	if len(buildArgs) > 0 {
